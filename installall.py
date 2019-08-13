@@ -1,44 +1,63 @@
-import os
-import re
-from random import randint
-from multiprocessing import Process
+#!/usr/bin/python3
+from argparse import ArgumentParser, Namespace as ArgNamespace
+from subprocess import run as subproc, CompletedProcess, CalledProcessError
+from typing import List
 
 
-def pip(package):
-    print(f"Updating {package}")
-    os.system(f"pip install -U {package}")
+def get_args() -> ArgNamespace:
+    parser = ArgumentParser(description='Upgrade all your python packages.')
+    parser.add_argument('-l', '--limit', type=int, default=7,
+                        help='set default upgrade try limit (default=7)')
+    parser.add_argument('-mp', '--multiproc', action='store_true',
+                        help='''use multiprocessing library to distribute
+                                upgrades across multiple processes''')
+    parser.add_argument('-c', '--check', action='store_true',
+                        help='check if upgrade was successful')
+    parser.add_argument('-v', '--verbose', action='store_true')
+    return parser.parse_args()
 
 
-def cabal():
-    print(f"Updating Haskell libraries")
-    os.system("cabal update")
+def pip(*args) -> List[str]:
+    return ['pip', *args]
 
 
-def stack():
-    print(f"Upgrading Stack")
-    os.system("stack update")
-    os.system("stack upgrade")
+def get_outdated_pckgs() -> List[str]:
+    res = subproc(pip('list', '-o'), capture_output=True, text=True)
+    return [line.split(' ')[0] for line in res.stdout.split('\n')[1:]]
 
 
-def npm():
-    print(f"Upgrading npm")
-    os.system("npm i npm")
+def upgrade(pckg: str, dutl: int, ntry: int = 0) -> bool:
+    if ntry == 0:
+        print('Upgrading', pckg)
+    try:
+        subproc(pip('install', '-U', pckg), check=True)
+        return True
+    except CalledProcessError:
+        return False if ntry == dutl else upgrade(pckg, ntry + 1, dutl)
 
 
 if __name__ == "__main__":
-    CWD = os.getcwd().replace('\\', '/')
-    UPDATE_FILE = f"{CWD}/updates{randint(1e5, 1e6)}.txt"
+    args = get_args()
+    pckgs = get_outdated_pckgs()
 
-    processes = []
-    os.system(f"pip list -o > {UPDATE_FILE}")
-    with open(UPDATE_FILE) as f:
-        for line in f.readlines():
-            match = re.match(r"^[A-za-z0-9-]+", line)
-            if match:
-                p = Process(target=pip, args=(match.group(),))
-                processes.append(p)
+    if len(pckgs) == 0:
+        exit('All packages are up to date!')
 
-    os.remove(UPDATE_FILE)
+    if args.multiproc:
+        from multiprocessing import Process as Proc
+        procs = (Proc(target=upgrade, args=(pckg, args.limit)) for pckg in pckgs)
 
-    for p in processes:
-        p.start()
+        for p in procs:
+            p.start()
+    else:
+        for pckg in pckgs:
+            upgrade(pckg, args.limit)
+
+    if args.check:
+        print('Checking outdated packages...')
+        pckgs = get_outdated_pckgs()
+        if len(pckgs) == 0:
+            print('All packages are up to date!')
+        else:
+            print('Not upgraded packages:')
+            print('\n'.join(pckgs))
