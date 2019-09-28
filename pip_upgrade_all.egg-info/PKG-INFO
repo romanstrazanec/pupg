@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: pip-upgrade-all
+Version: 1.1.1
+Summary: Upgrade all python packages.
+Home-page: https://github.com/romanstrazanec/pip_upgrade_all
+Author: Roman Stražanec
+Author-email: roman.strazanec007@gmail.com
+License: MIT
+Download-URL: https://github.com/romanstrazanec/pip_upgrade_all/archive/v1.1.1.tar.gz
+Description: UNKNOWN
+Keywords: pip install upgrade package all
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Other/Nonlisted Topic

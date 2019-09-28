@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+pip_upgrade_all.egg-info/PKG-INFO
+pip_upgrade_all.egg-info/SOURCES.txt
+pip_upgrade_all.egg-info/dependency_links.txt
+pip_upgrade_all.egg-info/requires.txt
+pip_upgrade_all.egg-info/top_level.txt
+src/upgradeall.py
