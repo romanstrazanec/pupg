@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='romanstrazanec_pip_upgrade_all',
-      scripts=['src/installall.py'],
+      scripts=['src/upgradeall.py'],
       version='1.1.0',
       description='Upgrade all python packages.',
       keywords="pip install upgrade package all",
