@@ -34,7 +34,7 @@ def upgrade(pckg: str, dutl: int, ntry: int = 0) -> bool:
         return False if ntry == dutl else upgrade(pckg, dutl, ntry + 1)
 
 
-if __name__ == "__main__":
+def main():
     args = get_args()
     pckgs = get_outdated_pckgs()
 
@@ -53,3 +53,5 @@ if __name__ == "__main__":
         else:
             print('Not upgraded packages:')
             print('\n'.join(pckgs))
+
+main()
