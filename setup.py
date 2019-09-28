@@ -1,16 +1,16 @@
 from setuptools import setup
 
 
-setup(name='romanstrazanec_pip_upgrade_all',
+setup(name='pip_upgrade_all',
       scripts=['src/upgradeall.py'],
-      version='1.1.0',
+      version='1.1.1',
       description='Upgrade all python packages.',
       keywords="pip install upgrade package all",
       author='Roman Stražanec',
       author_email='roman.strazanec007@gmail.com',
       license='MIT',
       url='https://github.com/romanstrazanec/pip_upgrade_all',
-      download_url='https://github.com/romanstrazanec/pip_upgrade_all/releases/tag/v1.1.0',
+      download_url='https://github.com/romanstrazanec/pip_upgrade_all/archive/v1.1.1.tar.gz',
       install_requires=['pip'],
       classifiers=[
           "Development Status :: 4 - Beta",
