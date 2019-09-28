@@ -31,7 +31,7 @@ def upgrade(pckg: str, dutl: int, ntry: int = 0) -> bool:
         subproc(pip('install', '-U', pckg), check=True)
         return True
     except CalledProcessError:
-        return False if ntry == dutl else upgrade(pckg, ntry + 1, dutl)
+        return False if ntry == dutl else upgrade(pckg, dutl, ntry + 1)
 
 
 if __name__ == "__main__":
