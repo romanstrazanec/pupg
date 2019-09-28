@@ -54,4 +54,6 @@ def main():
             print('Not upgraded packages:')
             print('\n'.join(pckgs))
 
-main()
+
+if __name__ == '__main__':
+    main()
