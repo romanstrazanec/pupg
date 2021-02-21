@@ -13,7 +13,7 @@ def read(*parts):
 
 
 setup(name='pipu',
-      scripts=['src/__main__.py'],
+      # scripts=['src/__main__.py'],
       version='1.1.1',
       description='Upgrade all python packages.',
       long_description=read('README.md'),
