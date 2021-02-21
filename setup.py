@@ -1,35 +1,37 @@
-import os
-import codecs
-
+from os import listdir
 from setuptools import setup, find_packages
 
 
-HERE = os.path.abspath(os.path.dirname(__file__))
+src = 'src'
+name = next(i for i in listdir(src) if len(i.split('.')) == 1)
+version = '0.0.2'
+
+author = 'Roman Stražanec'
+email = 'strazanec.roman@gmail.com'
+url = f'https://github.com/romanstrazanec/{name}'
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 
-def read(*parts):
-    with codecs.open(os.path.join(HERE, *parts), 'rb', 'utf-8') as f:
-        return f.read()
-
-
-setup(name='pipu',
-      # scripts=['src/__main__.py'],
-      version='1.1.1',
+setup(name=name,
+      version=version,
       description='Upgrade all python packages.',
-      long_description=read('README.md'),
+      long_description=long_description,
+      long_description_content_type="text/markdown",
       keywords="pip install upgrade package all",
-      author='Roman Stražanec',
-      author_email='strazanec.roman@gmail.com',
-      maintainer='Roman Stražanec',
-      maintainer_email='strazanec.roman@gmail.com',
+      author=author,
+      author_email=email,
+      maintainer=author,
+      maintainer_email=email,
       license='MIT',
-      url='https://github.com/romanstrazanec/pipu',
-      download_url='https://github.com/romanstrazanec/pipu/archive/v1.1.1.tar.gz',
-      packages=find_packages(where='src'),
-      package_dir={'': 'src'},
+      url=url,
+      download_url=f'{url}/archive/v{version}.tar.gz',
+      packages=find_packages(where=src),
+      package_dir={'': src},
       entry_points={
           'console_scripts': [
-              'pipu = pipu._cli:main',
+              f'{name} = {name}._cli:main',
           ],
       },
       install_requires=['pip'],
