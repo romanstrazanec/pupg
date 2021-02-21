@@ -1,4 +1,4 @@
-# PIP UPGRADE ALL
+# PIPU
 
 Python script for upgrading all python packages, which is still a big missing pip functionality.
 The script runs `pip list -o` command to get all outdated packages.
@@ -6,11 +6,11 @@ Then it creates a thread for all of the found upgradable packages and runs `pip 
 
 ## Installation
 
-`pip install romanstrazanec-pip-upgrade-all`
+`pip install pipu`
 
 ## Usage
 
-`upgradeall.py [-h] [-l LIMIT] [-c] [-v]`
+`python -m pipu [-h] [-l LIMIT] [-c] [-v]`
 
 ### optional arguments:
 
