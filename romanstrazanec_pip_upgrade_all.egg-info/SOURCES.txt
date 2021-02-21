@@ -1,9 +1,0 @@
-README.md
-setup.cfg
-setup.py
-romanstrazanec_pip_upgrade_all.egg-info/PKG-INFO
-romanstrazanec_pip_upgrade_all.egg-info/SOURCES.txt
-romanstrazanec_pip_upgrade_all.egg-info/dependency_links.txt
-romanstrazanec_pip_upgrade_all.egg-info/requires.txt
-romanstrazanec_pip_upgrade_all.egg-info/top_level.txt
-src/upgradeall.py
